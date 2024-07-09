@@ -25,6 +25,7 @@ exports.ProductListByBrand = async (req, res) => {
 }
 
 
+
 exports.ProductListByCategory = async (req, res) => {
     let result=await ListByCategoryService(req);
     return res.status(200).json(result)

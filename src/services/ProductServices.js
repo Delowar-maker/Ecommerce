@@ -43,8 +43,39 @@ const SliderListService = async () => {
 
 
 const ListByBrandService = async (req) => {
-    let BrandId=req.params.BrandId;
 
+    try {
+
+        let BrandID=new ObjectId(req.params.BrandID);
+
+        let MatchStage={$match:{brandID:BrandID}}
+            // join mongodb lookup
+        let JoinWithBrandStage= {$lookup:{from:"brands",localField:"brandID",foreignField:"_id",as:"brand"}};
+
+        // join mongodb lookup
+        let JoinWithCategoryStage={$lookup:{from:"categories",localField:"categoryID",foreignField:"_id",as:"category"}};
+
+        let UnwindBrandStage={$unwind:"$brand"}
+        let UnwindCategoryStage={$unwind:"$category"}
+
+        let ProjectionStage={$project:{'brand._id':0,'category._id':0,'categoryID':0,'brandID':0}}
+
+
+        // Query using aggregate
+        let data= await  ProductModel.aggregate([
+            MatchStage,
+            JoinWithBrandStage,
+            JoinWithCategoryStage,
+            UnwindBrandStage,
+            UnwindCategoryStage,
+            ProjectionStage
+
+        ])
+        return {status:"success",data:data}
+
+    }catch (e) {
+        return {status:"fail",data:e}.toString()
+    }
 }
 
 const ListByCategoryService = async (req) => {
