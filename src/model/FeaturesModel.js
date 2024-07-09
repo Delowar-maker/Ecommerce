@@ -1,12 +1,12 @@
-const mongoose = require('mongoose')
+const mongoose=require('mongoose');
+const DataSchema=mongoose.Schema({
+        name:{type:String,required:true},
+        description:{type:String,required:true},
+        img:{type:String,required:true},
+    },
+    {timestamps:true,versionKey:false}
+)
+const FeaturesModel=mongoose.model('features',DataSchema)
+module.exports=FeaturesModel
 
 
-const DataSchema = mongoose.Schema({
-    categoryName: { type: String, unique: true },
-    categoryImg: { type: String, unique: true }
-},
-    { timestamps: true, versionKey: false })
-
-
-const FeaturesModel = mongoose.model('categories', DataSchema)
-module.exports = FeaturesModel

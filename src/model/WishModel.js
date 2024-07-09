@@ -1,12 +1,9 @@
-const mongoose = require('mongoose')
-
-
-const DataSchema = mongoose.Schema({
-        categoryName: {type: String, unique: true},
-        categoryImg:{type:String,unique:true}
+const mongoose=require('mongoose');
+const DataSchema=mongoose.Schema({
+        productID:{type:mongoose.Schema.Types.ObjectId,required:true},
+        userID:{type:mongoose.Schema.Types.ObjectId,required:true},
     },
-    {timestamps: true,versionKey:false})
-
-
-const WishModel = mongoose.model('categories', DataSchema)
-module.exports = WishModel
+    {timestamps:true,versionKey:false}
+)
+const WishModel=mongoose.model('wishes',DataSchema)
+module.exports=WishModel

@@ -1,12 +1,9 @@
-const mongoose = require('mongoose')
-
-
-const DataSchema = mongoose.Schema({
-    categoryName: { type: String, unique: true },
-    categoryImg: { type: String, unique: true }
+const mongoose=require('mongoose');
+const DataSchema=mongoose.Schema({
+    type:{type:String,unique:true,required:true},
+    description:{type:String,required:true}
 },
-    { timestamps: true, versionKey: false })
-
-
-const LegalModel = mongoose.model('categories', DataSchema)
-module.exports = LegalModel
+{timestamps:true,versionKey:false}
+)
+const LegalModel=mongoose.model('legals',DataSchema)
+module.exports=LegalModel
