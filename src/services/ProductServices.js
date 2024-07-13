@@ -103,13 +103,33 @@ const ListByCategoryService = async (req) => {
         return {status:"fail",data:e}.toString()
     }
 }
+
+const ListByRemarkService = async (req) => {
+    try {
+
+        let Remark=req.params.Remark;
+        let MatchStage={$match:{remark:Remark}}
+
+        let JoinWithBrandStage= {$lookup:{from:"brands",localField:"brandID",foreignField:"_id",as:"brand"}};
+        let JoinWithCategoryStage={$lookup:{from:"categories",localField:"categoryID",foreignField:"_id",as:"category"}};
+        let UnwindBrandStage={$unwind:"$brand"}
+        let UnwindCategoryStage={$unwind:"$category"}
+        let ProjectionStage={$project:{'brand._id':0,'category._id':0,'categoryID':0,'brandID':0}}
+
+        let data= await  ProductModel.aggregate([
+            MatchStage, JoinWithBrandStage,JoinWithCategoryStage,
+            UnwindBrandStage,UnwindCategoryStage, ProjectionStage
+        ])
+        return {status:"success",data:data}
+
+    }catch (e) {
+        return {status:"fail",data:e}.toString()
+    }
+}
 // similar end
 
 // similar start
 
-const ListByRemarkService = async (req) => {
-
-}
 
 const ListBySmilierService = async (req) => {
 
@@ -164,3 +184,4 @@ module.exports = {
     ReviewListService
 }
 
+//11;

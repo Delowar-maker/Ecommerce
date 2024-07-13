@@ -41,7 +41,8 @@ exports.ProductListByKeyword = async (req, res) => {
 }
 
 exports.ProductListByRemark = async (req, res) => {
-
+    let result=await ListByRemarkService(req);
+    return res.status(200).json(result)
 
 }
 
