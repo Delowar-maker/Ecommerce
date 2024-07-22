@@ -19,7 +19,9 @@ router.get('/ProductReviewList/:ProductID', ProductController.ProductReviewList)
 
 router.post('/ProductListByFilter', ProductController.ProductListByFilter);
 
+// user
 
+router.get('UserOTP/:email')
 
 
 
