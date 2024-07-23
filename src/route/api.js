@@ -1,6 +1,7 @@
 const express = require("express");
 
 const ProductController = require("../controller/ProductController");
+const UserController = require('../controllers/UserController')
 
 const router = express.Router();
 
@@ -21,7 +22,12 @@ router.post('/ProductListByFilter', ProductController.ProductListByFilter);
 
 // user
 
-router.get('UserOTP/:email')
+router.get('/UserOTP/:email', UserController.UserOTP)
+router.get('/VerifyLogin/:email/:otp', UserController.VerifyLogin)
+router.get('/UserLogout', AuthVerification, UserController.UserLogout)
+router.post('/CreateProfile', AuthVerification, UserController.CreateProfile)
+router.post('/UpdateProfile', AuthVerification, UserController.UpdateProfile)
+router.get('/ReadProfile', AuthVerification, UserController.ReadProfile)
 
 
 
