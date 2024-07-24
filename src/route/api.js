@@ -29,6 +29,10 @@ router.post('/CreateProfile', AuthVerification, UserController.CreateProfile)
 router.post('/UpdateProfile', AuthVerification, UserController.UpdateProfile)
 router.get('/ReadProfile', AuthVerification, UserController.ReadProfile)
 
+// Wish
+router.post('/SaveWishList', AuthVerification, WishListController.SaveWishList)
+router.post('/RemoveWishList', AuthVerification, WishListController.RemoveWishList)
+router.get('/WishList', AuthVerification, WishListController.WishList)
 
 
 module.exports = router;
